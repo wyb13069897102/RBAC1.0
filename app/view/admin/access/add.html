@@ -1,0 +1,38 @@
+{% extends "../common/Ifreambase.html" %}
+
+{% block right %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">权限添加</h3>
+    </div>
+    <div class="panel-body">
+    </div>
+    <div>
+        <form calss="input-form" action="/admin/access/doadd" method="POST">
+            <ul>
+                <li>权限类型：
+                    <select name="access_type" id="">
+                        <option value="1">模块</option>
+                        <option value="2">菜单</option>
+                        <option value="3">操作</option>
+                    </select>
+                </li>
+                <li>权限模块：<input type="text" name="access_module"></li>
+                <li>权限操作：<input type="text" name="access_action"></li>
+                <li>权限资源：<input type="text" name="access_url"></li>
+                <li>所属模块：
+                    <select name="access_module_id" id="">
+                        <option value="0">顶级模块</option>
+                        {% for moudle in accessmoudles %}
+                        <option value="{{moudle._id}}">{{moudle.access_module}}</option>
+                        {% endfor %}
+                    </select>
+                </li>
+                <li>权限排序：<input type="text" name="data_sort"></li>
+                <li>权限描述：<textarea name="access_desc" cols="30" rows="10"></textarea></li>
+                <input type="submit" class="btn btn-default">
+            </ul>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "./common/IfreamAdd.html" %}
+
+{% block right %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">修改用户</h3>
+    </div>
+    <div class="panel-body">
+        用户信息
+    </div>
+    <div>
+        <form calss="input-form" action="/admin/staff/doedit" method="POST">
+            <ul>
+                <input type="hidden" name="staff_id" value="{{staff._id}}">
+                <li>用户账号：<input type="text" name="username" value="{{staff.username}}"></li>
+                <li>用户密码：<input type="password" name="password"></li>
+                <li>用户名称：<input type="text" name="name" value="{{staff.name}}"></li>
+                <li>用户编号：<input type="text" name="no" value="{{staff.no}}"></li>
+                <li>用户手机：<input type="text" name="phone"  value="{{staff.phone}}"></li>
+                <li>用户状态：
+                    {% if staff.status == 1%}
+                    <input type="radio" name="status"  value="1" checked>有效
+                    <input type="radio" name="status"  value="0" >无效
+                    {% else %}
+                    <input type="radio" name="status"  value="1" >有效
+                    <input type="radio" name="status"  value="0" checked>无效
+                    {% endif %}
+                </li>
+                <li>用户角色：
+                    <select name="role_id" id="">
+                        {% for role in roles %}
+                        {% if staff.role_id.toString() == role._id.toString() %}
+                        <option value="{{role._id}}" selected>{{role.role_name}}</option>
+                        {% else %}
+                        <option value="{{role._id}}" >{{role.role_name}}</option>
+                        {% endif%}
+                        {% endfor %}
+                    </select>
+                </li>
+                <input type="submit" class="btn btn-default">
+            </ul>
+        </form>
+    </div>
+</div>
+{% endblock %}

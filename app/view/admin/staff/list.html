@@ -1,0 +1,42 @@
+{% extends "./common/IfreamAdd.html" %}
+
+{% block right %}
+<div class="table-response">
+    <table class="table table-bordered">
+        <thead >
+            <th class="text-center">用户名称</th>
+            <th class="text-center">用户编号</th>
+            <th class="text-center">用户手机</th>
+            <th class="text-center">用户角色</th>
+            <th class="text-center">用户状态</th>
+            <th class="text-center">创建时间</th>
+            <th class="text-center">操作</th>
+        </thead>
+        <tbody>
+            {% for staff in staffs %}
+            <tr>
+                <td class="text-center">{{staff.name}}</td>
+                <td class="text-center">{{staff.no}}</td>
+                <td class="text-center">{{staff.phone}}</td>
+                {% if staff.is_super === 1%}
+                <td class="text-center">超级管理员</td>
+                {% else %}
+                <td class="text-center">{{staff.role[0].role_name}}</td>
+                {% endif %}
+                {% if staff.status == 1 %}
+                <td class="text-center">正常</td>
+                {% else %}
+                <td class="text-center">异常</td>
+                {% endif %}
+                <td class="text-center">{{helper.dateFormate(staff.time_create)}}</td>
+                <td class="text-center">
+                    <a href="/admin/staff/edit?id={{staff._id}}">修改</a>/
+                    <a href="/admin/staff/delete?id={{staff._id}}">删除</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

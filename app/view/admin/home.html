@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/admin/css/home.css">
+    <link rel="stylesheet" href="/public/admin/css/base.css">
+    <script src="/public/admin/js/jquery.js"></script>
+    <script src="/public/admin/js/base.js"></script>
+</head>
+
+<body>
+    <!-- header  -->
+    {% include "./common/header.html" %}
+    <!-- aside + content -->
+    <div class="row">
+        {% include "./common/aside.html" %}
+        <div class="col-md-9">
+            <iframe id="rightIframe" style="width: 100%;" src="/admin/welcome" frameborder = "0" name="rightiFrame"></iframe>
+        </div>
+    </div>
+    <!-- footer -->
+</body>
+
+</html>

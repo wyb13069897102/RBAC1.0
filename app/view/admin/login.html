@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        img{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<link rel="stylesheet" href="/public/admin/css/login.css">
+<body>
+    <div class="loginBox">
+    <h2>Login</h2>
+    <form action="/admin/dologin?_csrf={{ctx.csrf}}" method="POST">
+
+        <div class="item">
+            <input type="text" name="username" required>
+            <label for="">Username</label>
+        </div>
+        <div class="item">
+            <input type="password" name="password" required>
+            <label for="">Password</label>
+        </div>
+        <div class="item">
+            <input type="text" name="code" required>
+            <label for="">验证码</label>
+        </div>
+        <img src="/admin/veriy" onclick="javascript:this.src='/admin/veriy?random='+Math.random()">
+        <button class="btn">
+            <input type="submit" value="提交">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        </div>
+    </form>
+</body>
+</html>

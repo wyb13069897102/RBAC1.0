@@ -1,0 +1,51 @@
+{% extends "../common/Ifreambase.html" %}
+
+{% block right %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">角色授权</h3>
+    </div>
+    <div class="table-response">
+        <form calss="input-form" action="/admin/role/doauth" method="POST">
+            <input type="hidden" name="role_id" value="{{role_id}}">
+            <div class="table-response">
+                <table class="table table-bordered">
+                    {% for access in accessAll %}
+                    <tr>
+                        <td class="text-center">
+                            {% if access.checked == true %}
+                            <label for="">
+                                <input type="checkbox" checked value="{{access._id}}" name="access_checked[]">
+                            </label>
+                            {{access.access_module}}
+                            {% else %}
+                            <label for="">
+                                <input type="checkbox"  value="{{access._id}}" name="access_checked[]">
+                            </label>
+                            {{access.access_module}}
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            {% for subaccess in access.subAccess %}
+                            {% if subaccess.checked == true %}
+                            <label for="">
+                                <input type="checkbox" checked name="access_checked[]" value="{{subaccess._id}}">
+                            </label>
+                            {{subaccess.access_action}}
+                            {% else %}
+                            <label for="">
+                                <input type="checkbox"  name="access_checked[]" value="{{subaccess._id}}">
+                            </label>
+                            {{subaccess.access_action}}
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <input type="submit" class="btn btn-default">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "../common/Ifreambase.html" %}
+
+{% block right %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">修改角色</h3>
+    </div>
+    <div class="panel-body">
+        角色信息
+    </div>
+    <div>
+        <form action="/admin/role/doedit" method="POST">
+            <ul>
+                <li><input type="text" name="role_name" value="{{role.role_name}}"></li>
+                <li><input type="hidden" name="_id" value="{{role._id}}"></li>
+                <li><input type="text" name="role_desc" value="{{role.role_desc}}"></li>
+                <li>
+                    {% if role.data_status == 1 %}
+                    <input type="checkbox" name="data_status" checked> 正常
+                    {% else %}
+                    <input type="checkbox" name="data_status"> 正常
+                    {% endif %}
+                </li>
+                <input type="submit" value="修改">
+            </ul>
+        </form>
+    </div>
+</div>
+{% endblock %}

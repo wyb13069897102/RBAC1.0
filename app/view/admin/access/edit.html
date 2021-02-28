@@ -1,0 +1,68 @@
+{% extends "../common/Ifreambase.html" %}
+
+{% block right %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">权限修改</h3>
+    </div>
+    <div class="panel-body">
+    </div>
+    <div>
+        <form calss="input-form" action="/admin/access/doedit" method="POST">
+            <ul>
+                <input type="hidden"  name="_id" value="{{access._id}}">
+                <li>权限类型：
+                    <select name="access_type" id="">
+                        {% if access.access_type == 1 %}
+                        <option value="1" selected>模块</option>
+                        <option value="2" >菜单</option>
+                        <option value="3" >操作</option>
+                        {% elif access.access_type == 2 %}
+                        <option value="1" >模块</option>
+                        <option value="2" selected >菜单</option>
+                        <option value="3" >操作</option>
+                        {% else %}
+                        <option value="1" >模块</option>
+                        <option value="2" >菜单</option>
+                        <option value="3" selected >操作</option>
+                        {% endif %}
+                    </select>
+                </li>
+                <li>权限模块：<input type="text" name="access_module" value="{{access.access_module}}"></li>
+                <li>权限操作：<input type="text" name="access_action" value="{{access.access_action}}"></li>
+                <li>权限资源：<input type="text" name="access_url" value="{{access.access_url}}"></li>
+                <li>所属模块：
+                    <select name="access_module_id" id="">
+                        {% if access.access_module_id == '0' %}
+                        <option value="0" selected>顶级模块</option>
+                        {% endif %}
+
+                        {% for module in modules %}
+
+                            {% if module._id.toString() == access.access_module_id.toString() %}
+                            <option value="{{module._id}}" selected>{{module.access_module}}</option>
+                            {% else %}
+                            <option value="{{module._id}}" >{{module.access_module}}</option>
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </select>
+                </li>
+                <li>权限状态：
+                    {% if access.data_status == 1%}
+                    <input type="radio" name="data_status"  value="1" checked>有效
+                    <input type="radio" name="data_status"  value="0" >无效
+                    {% else %}
+                    <input type="radio" name="data_status"  value="1" >有效
+                    <input type="radio" name="data_status"  value="0" checked>无效
+                    {% endif %}
+                </li>
+                <li>权限排序：<input type="text" name="data_sort" value="{{access.data_sort}}"></li>
+                <li>权限描述：<textarea name="access_desc" cols="30" rows="10">{{access.access_desc}}</textarea></li>
+                <input type="submit" class="btn btn-default">
+            </ul>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "../common/Ifreambase.html" %}
+
+{% block right %}
+<div class="table-response">
+    <table class="table table-bordered">
+        <thead >
+            <th class="text-center">权限模块</th>
+            <th class="text-center">权限类型</th>
+            <th class="text-center">权限操作</th>
+            <th class="text-center">权限资源</th>
+            <th class="text-center">权限排序</th>
+            <th class="text-center">权限描述</th>
+            <th class="text-center">数据状态</th>
+            <th class="text-center">操作</th>
+        </thead>
+        <tbody>
+            {% for access in accessAll %}
+           <tr>
+                <td class="text-center">{{access.access_module}}</td>
+                <td class="text-center">
+                    {% if access.access_type == 1 %}
+                    模块
+                    {% elif access.access_type == 2 %}
+                    菜单
+                    {% else %}
+                    操作
+                    {% endif %}
+                </td>
+                <td class="text-center">{{access.access_action}}</td>
+                <td class="text-center">{{access.access_url}}</td>
+                <td class="text-center">{{access.data_sort}}</td>
+                <td class="text-center">{{access.access_desc}}</td>
+                <td class="text-center">
+                    {% if access.data_status == 1%}
+                    有效
+                    {% else %}
+                    无效
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    <a href="/admin/access/edit?id={{access._id}}">修改</a>/
+                    <a href="/admin/access/delete?id={{access._id}}&type=1">删除</a>
+                </td>
+           </tr>
+            {% for subaccess in access.subAccess %}
+            <tr>
+                <td class="text-center">{{subaccess.access_module}}</td>
+                <td class="text-center">
+                    {% if subaccess.access_type == 1 %}
+                    模块
+                    {% elif subaccess.access_type == 2 %}
+                    菜单
+                    {% else %}
+                    操作
+                    {% endif %}
+                </td>
+                <td class="text-center">{{subaccess.access_action}}</td>
+                <td class="text-center">{{subaccess.access_url}}</td>
+                <td class="text-center">{{subaccess.data_sort}}</td>
+                <td class="text-center">{{subaccess.access_desc}}</td>
+                <td class="text-center">
+                    {% if access.data_status == 1%}
+                    有效
+                    {% else %}
+                    无效
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    <a href="/admin/access/edit?id={{subaccess._id}}">修改</a>/
+                    <a href="/admin/access/delete?id={{subaccess._id}}&type=2">删除</a>
+                </td>
+           </tr>
+            {% endfor %}
+           {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

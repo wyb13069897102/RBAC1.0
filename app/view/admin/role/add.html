@@ -1,0 +1,21 @@
+{% extends "../common/Ifreambase.html" %}
+
+{% block right %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">添加角色</h3>
+    </div>
+    <div class="panel-body">
+        角色信息
+    </div>
+    <div>
+        <form action="/admin/role/doadd" method="POST">
+            <ul>
+                <li>角色名称：<input type="text" name="role_name"></li>
+                <li>角色描述：<input type="text" name="role_desc"></li>
+                <input type="submit" value="添加角色">
+            </ul>
+        </form>
+    </div>
+</div>
+{% endblock %}
